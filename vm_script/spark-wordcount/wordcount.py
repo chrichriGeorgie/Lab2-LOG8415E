@@ -16,6 +16,7 @@
 #
 
 import sys
+import time
 from operator import add
 
 from pyspark.sql import SparkSession
@@ -30,6 +31,8 @@ if __name__ == "__main__":
         .builder\
         .appName("PythonWordCount")\
         .getOrCreate()
+    
+    start = time.time()
 
     lines = spark.read.text(sys.argv[1]).rdd.map(lambda r: r[0])
     counts = lines.flatMap(lambda x: x.split(' ')) \
@@ -39,4 +42,9 @@ if __name__ == "__main__":
     for (word, count) in output:
         print("%s: %i" % (word, count))
 
+    end = time.time()
+    execTime = end-start
+
     spark.stop()
+
+    print("Execution time: {exetime} seconds".format(exetime = execTime))
