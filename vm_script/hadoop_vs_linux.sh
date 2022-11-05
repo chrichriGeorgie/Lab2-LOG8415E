@@ -7,6 +7,7 @@ cd ..
 docker run -d --name hadoop-log8415 --mount type=bind,source="$PWD"/resources,target=/opt/hadoop/resources hadoop-log8415
 
 #Experiment header
+printf "\n"
 echo "HADOOP VS LINUX"
 echo "======================================"
 printf "\n"
