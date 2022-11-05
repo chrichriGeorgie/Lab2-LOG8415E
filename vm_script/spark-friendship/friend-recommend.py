@@ -35,9 +35,9 @@ def get_user_recommendations(dataFrame, user):
     rows = spark.sql("select user, potentialFriend from table where user == " + user + " ORDER BY count desc, potentialFriend asc LIMIT " + str(numberOfRecommendations)).collect()
     if(len(rows) > 0):
         for row in rows:
-            potentialFriendsString += str(row[1]) + ", "
+            potentialFriendsString += str(row[1]) + ","
 
-    print(user + potentialFriendsString)
+    print(user + potentialFriendsString[:-1])
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
