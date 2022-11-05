@@ -1,5 +1,5 @@
 # LOG8415E - Assignment 2
-# friend_recommandation.py
+# friend-recommend.py
 # Python file to get friend recommandations of different users.
 # This file is inspired by https://github.com/xjlin0/cs246/blob/master/w2015/hw1/q1_people_you_may_know_spark.py
 
@@ -14,9 +14,9 @@ import time
 # while the common friends will have a value of 1 for 1 pair.
 def map_friends_and_commons(user, friends):
     alreadyConnectedCount = -9999999999
-    connecteds = [((user, friend), alreadyConnectedCount) for friend in friends]
-    commons = [(pair, 1) for pair in itertools.permutations(friends, 2)]
-    return connecteds + commons
+    alreadyFriends = [((user, friend), alreadyConnectedCount) for friend in friends]
+    mutuals = [(pair, 1) for pair in itertools.permutations(friends, 2)]
+    return alreadyFriends + mutuals
 
 # Map operation to combine the pair of common friends count.
 # Returns an array with the user, the potential friend and the amount of mutual friends.
@@ -57,6 +57,7 @@ if __name__ == "__main__":
     userFriends = lines.map(lambda line: line.split('\t'))
 
     # Map-Reduce operation to have the count of pair of common friends.
+    # Remove already friends pairs.
     pairCounts = userFriends.flatMap(lambda x: map_friends_and_commons(x[0], x[1].split(','))) \
     .reduceByKey(add) \
     .filter(lambda row: row[1] > 0)
