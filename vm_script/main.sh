@@ -9,3 +9,4 @@ cd "$(dirname "$0")"
 ./hadoop_vs_spark.sh
 
 #Start Frienship problem
+./spark-friendship.sh
