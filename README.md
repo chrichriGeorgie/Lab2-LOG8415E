@@ -1,4 +1,7 @@
 # Lab2-LOG8415E
 Github repository for the second assignment of the LOG8415E class. Made by: Jimmy Bell, Jérôme Cléris, Louis-Alexandre Hébert and Christophe St-Georges
-time hadoop jar hadoop-mapreduce-examples-3.3.1.jar wordcount ~/input ~/output
-/opt/hadoop/share/hadoop/mapreduce
+#Instructions to run the code
+To run the code, the first step is to deploy an Azure Virtual Machine. The machine the team chose is a Standard D2s v3 instance, since its specifications were close the the AWS M4.large instance. The operating system must be Ubuntu 20.04. You must connect to the deployed virtual machine. When creating the machine, you can configure a key pair or a password to use SSH. Since a key pair is more secure, this is what we would recommend. Then, once the Azure instance is accessed, you must clone this git repository: https://github.com/chrichriGeorgie/Lab2-LOG8415E.
+Before running the main script, make sure that docker is installed on the machine. Indeed, each experiment is automated by a bash script that starts various Docker containers. Each script must also have the permission to be executed. There are four scripts located in the vm_script repository: main.sh, hadoop_vs_spark.sh, hadoop_vs_linux.sh and spark-friendship.sh. To give the right permission, first go to the vm_script repository. It can be done with: cd Lab2-LOG8415E/vm_script.
+Then, to give the right permission run the following command on each script. The "+x" parameter of the chmod command allows a file to be executed. Do chmod +x <filename>. When you are ready to run all experiments, run the following command: ./main.sh
+If the script stops anormally during its execution, make sure to remove the Docker containers started by the script. Refer to the Docker documentation to learn how to stop and remove containers.
