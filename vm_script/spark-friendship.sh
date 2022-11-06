@@ -2,6 +2,11 @@
 #setting working directory
 cd spark-friendship
 
+#Stoping and removing spark friendship containers and images
+echo "Closing and removing existing container"
+docker stop spark
+docker rm spark
+
 #Build spark friendship container
 echo "Building image"
 docker build . -t spark-friendship
