@@ -14,15 +14,15 @@ printf "\n"
 
 #Run WordCount Experiment on Hadoop
 echo "Running Hadoop WordCount on pg4300.txt"
-echo "Time Taken:"
-time docker exec -i hadoop-log8415 bash -c "hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar wordcount input output > hadoop-output.txt"
+hadtime=$( TIMEFORMAT="%R"; { time docker exec -i hadoop-log8415 bash -c "hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar wordcount input output > hadoop-output.txt"; } 2>&1 )
+echo "Time Taken: $hadtime"
 printf "\n"
 
 #Run WordCount Experiment on Linux
 
 echo "Running Linux WordCount on pg4300.txt"
-echo "Time Taken:"
-time docker exec -i hadoop-log8415 bash -c "cat ./resources/pg4300.txt | tr ' ' '\n' | sort | uniq -c > linux-output.txt"
+lintime=$( TIMEFORMAT="%R"; { time docker exec -i hadoop-log8415 bash -c "cat ./resources/pg4300.txt | tr ' ' '\n' | sort | uniq -c > linux-output.txt"; } 2>&1 )
+echo "Time Taken: $lintime"
 printf "\n"
 
 #Stoping and removing hadoop vs linux containers and images
