@@ -18,7 +18,7 @@ def map_friends_and_commons(user, friends):
     mutuals = [(pair, 1) for pair in itertools.permutations(friends, 2)]
     return alreadyFriends + mutuals
 
-# Map operation to combine the pair of common friends count.
+# Combine the pair of common friends count.
 # Returns an array with the user, the potential friend and the amount of mutual friends.
 def map_user_potential_friend_count(row):
     user = row[0][0]
@@ -26,7 +26,7 @@ def map_user_potential_friend_count(row):
     count = row[1]
     return (user, potentialFriend, count)
 
-# Reduce operation to find the 10 friend recommandations for a specific user.
+# Find the 10 friend recommandations for a specific user.
 def get_user_recommendations(dataFrame, user):
     numberOfRecommendations = 10
     potentialFriendsString = "\t"
