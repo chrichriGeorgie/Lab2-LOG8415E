@@ -9,25 +9,42 @@ from operator import add
 from pyspark.sql import SparkSession
 import time
 
-# Map operation to do a pair of friends and common friends.
-# A negative value is given to friends, since we want to remove them after
-# while the common friends will have a value of 1 for 1 pair.
 def map_friends_and_commons(user, friends):
+    """Map operation to do a pair of friends and common friends. A negative value is given to friends, since we want to remove them after while the common friends will have a value of 1 for 1 pair.
+
+    Parameters:
+    user (string): the user being read
+    friends (string array): the array of this user's friends
+
+    Returns:
+    string array: Returning value
+    """
     alreadyConnectedCount = -9999999999
     alreadyFriends = [((user, friend), alreadyConnectedCount) for friend in friends]
     mutuals = [(pair, 1) for pair in itertools.permutations(friends, 2)]
     return alreadyFriends + mutuals
 
-# Combine the pair of common friends count.
-# Returns an array with the user, the potential friend and the amount of mutual friends.
 def map_user_potential_friend_count(row):
+    """Combine the pair of common friends count. Returns an array with the user, the potential friend and the amount of mutual friends.
+
+    Parameters:
+    row (array): row of pair counts
+
+    Returns:
+    tuple: Returning value
+    """
     user = row[0][0]
     potentialFriend = int(row[0][1])
     count = row[1]
     return (user, potentialFriend, count)
 
-# Find the 10 friend recommandations for a specific user.
 def get_user_recommendations(dataFrame, user):
+    """Find the 10 friend recommandations for a specific user.
+
+    Parameters:
+    dataFrame (dataFrame): Frame to get the recommendations from
+    user (string): user number for which we want the recommendations
+    """
     numberOfRecommendations = 10
     potentialFriendsString = "\t"
 
