@@ -25,7 +25,7 @@ def map_friends_and_commons(user, friends):
     return alreadyFriends + mutuals
 
 def map_user_potential_friend_count(row):
-    """Combine the pair of common friends count. Returns an array with the user, the potential friend and the amount of mutual friends.
+    """Maps the pair of common friends and count into seperated columns. Returns a tuple with the user, the potential friend and the amount of mutual friends.
 
     Parameters:
     row (array): row of pair counts
